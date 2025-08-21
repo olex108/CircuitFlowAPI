@@ -34,7 +34,7 @@ def add_to_json_file(json_file, add_data):
 
 def replace_in_json_file(json_file, add_data):
     """
-    Функция для добавления данных в файл JSON
+    Функция для замены данных в файл JSON
 
     :param json_file: адрес JSON файла
     :param add_data: данные для добавления в файл
