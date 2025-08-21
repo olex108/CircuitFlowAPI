@@ -1,8 +1,8 @@
 import os
 import copy
-import parameters
+
+from src import parameters, calculate_estimate
 from src.data_functions import add_to_json_file, get_data, replace_in_json_file
-import calculate_estimate
 
 
 def create_new_project():

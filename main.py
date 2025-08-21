@@ -1,6 +1,4 @@
-from src import option_functions
-
-from src import parameters
+from src import option_functions, parameters
 
 
 def select_option():
@@ -22,3 +20,6 @@ def select_option():
 
     select_option()
 
+
+if __name__ == "__main__":
+    select_option()
