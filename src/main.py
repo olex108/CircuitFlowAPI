@@ -1,4 +1,22 @@
 from src.calculations import parameters, option_functions
+from fastapi import FastAPI
+from src.config.settings import get_settings
+from contextlib import asynccontextmanager
+from src.config.database import dispose_session
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # startup
+    yield
+    # shutdown
+    # Отключение БД
+    await dispose_session()
+
+
+main_app = FastAPI(
+    lifespan=lifespan
+)
 
 
 def select_option():
@@ -22,4 +40,14 @@ def select_option():
 
 
 if __name__ == "__main__":
-    select_option()
+    import uvicorn
+
+    settings = get_settings()
+
+    uvicorn.run(
+        "src.main:main_app",
+        host=settings.HOST,
+        port=settings.PORT,
+        reload=True
+    )
+
