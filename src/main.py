@@ -1,4 +1,4 @@
-from src import option_functions, parameters
+from src.calculations import parameters, option_functions
 
 
 def select_option():
