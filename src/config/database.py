@@ -8,10 +8,11 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine, Asyn
 settings = get_settings()
 
 async_engine = create_async_engine(
-    url=settings.async_postgresql_url,
+    url=settings.database_url,
     echo=settings.DEBUG,
     pool_size=settings.POOL_SIZE,
     max_overflow=settings.MAX_OVERFLOW,
+    connect_args={"check_same_thread": False} if settings.DB == "sqlite" else None
 )
 
 session_maker = async_sessionmaker(
@@ -27,8 +28,11 @@ async def dispose_session() -> None:
 
 
 async def get_session() -> AsyncGenerator[AsyncSession, None]:
-    try:
-        async with session_maker() as session:
+    async with session_maker() as session:
+        try:
             yield session
-    except Exception:
-        await async_engine.dispose()
+        except Exception:
+            await session.rollback()
+            raise
+        finally:
+            await session.close()

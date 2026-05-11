@@ -12,11 +12,13 @@ class Settings(BaseSettings):
 
     DEBUG: bool = True
 
-    DB_USERNAME: str
-    DB_NAME : str
-    DB_PASSWORD : str
-    DB_HOST : str
-    DB_PORT : int
+    DB : str = "sqlite"
+
+    DB_USERNAME: str | None = None
+    DB_NAME : str | None = None
+    DB_PASSWORD : str | None = None
+    DB_HOST : str | None = None
+    DB_PORT : int | None = None
 
     POOL_SIZE: int = 5
     MAX_OVERFLOW: int = 10
@@ -25,11 +27,15 @@ class Settings(BaseSettings):
         env_file=BASE_PATH / ".env",
         env_file_encoding="utf-8",
         extra="ignore"
-
     )
 
     @property
-    def async_postgresql_url(self):
+    def database_url(self) -> str:
+
+        if self.DB == "sqlite":
+            db_path = self.BASE_PATH / "sql_database.db"
+            return f"sqlite:///{db_path}"
+
         return f"postgresql+psycopg2://{self.DB_USERNAME}:{self.DB_PASSWORD}@{self.DB_HOST}/{self.DB_PORT}/{self.DB_NAME}"
 
 
