@@ -3,6 +3,9 @@ from src.calculations import parameters
 import copy
 
 
+
+
+
 def calculate_estimate(project_parameters):
     """
     Функция создает смету из параметров проекта
@@ -247,4 +250,3 @@ def calculate_estimate(project_parameters):
             )
 
     return project_estimate
-

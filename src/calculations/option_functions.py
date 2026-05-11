@@ -175,5 +175,3 @@ def change_project_parameters(project_name_data: dict, dictionary_data: dict):
     print_dictionary_lines(new_project_parameters)
 
     open_project(project_name_data)
-
-
