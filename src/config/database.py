@@ -1,3 +1,4 @@
+# config/database.py
 from typing import AsyncGenerator
 
 from src.config.settings import get_settings

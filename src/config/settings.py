@@ -34,7 +34,7 @@ class Settings(BaseSettings):
 
         if self.DB == "sqlite":
             db_path = self.BASE_PATH / "sql_database.db"
-            return f"sqlite:///{db_path}"
+            return f"sqlite+aiosqlite:///{db_path}"
 
         return f"postgresql+psycopg2://{self.DB_USERNAME}:{self.DB_PASSWORD}@{self.DB_HOST}/{self.DB_PORT}/{self.DB_NAME}"
 
