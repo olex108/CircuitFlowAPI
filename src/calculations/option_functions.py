@@ -4,9 +4,9 @@
 
 import os
 import copy
-import parameters
-from src.data_functions import add_to_json_file, get_data, replace_in_json_file
-import calculate_estimate
+
+from src.calculations import parameters, calculate_estimate
+from src.calculations.data_functions import add_to_json_file, get_data, replace_in_json_file
 
 
 def create_new_project():
@@ -192,5 +192,3 @@ def change_project_parameters(project_name_data: dict, dictionary_data: dict):
     print_dictionary_lines(new_project_parameters)
 
     open_project(project_name_data)
-
-
