@@ -4,15 +4,19 @@ from src.config.settings import get_settings
 from contextlib import asynccontextmanager
 from src.config.database import dispose_session
 from src.routers import key, design, estimate
+from src.config.broker_taskiq import broker
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # startup
+    if not broker.is_worker_process:
+        await broker.sturtup()
     yield
     # shutdown
     # Отключение БД
     await dispose_session()
+    await broker.shutdown()
 
 
 main_app = FastAPI(
