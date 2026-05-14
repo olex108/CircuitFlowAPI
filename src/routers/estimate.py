@@ -32,8 +32,6 @@ async def create_estimate(
             detail="Design params is not found"
         )
 
-
-
     return estimate
 
 
