@@ -24,6 +24,9 @@ dependencies = [
     "aiosqlite (>=0.22.1,<0.23.0)",
     "taskiq (>=0.12.4,<0.13.0)",
     "taskiq-aio-pika (>=0.6.0,<0.7.0)"
+    "aiosqlite (>=0.22.1,<0.23.0)"
+    "pytest (>=8.4.2,<9.0.0)",
+    "psycopg2 (>=2.9.11,<3.0.0)"
 ]
 
 

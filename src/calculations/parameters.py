@@ -6,6 +6,7 @@ group_power = {
     40: [5500, 8800],
 }
 
+#
 waterproof_group = [True, False]
 list_group_tipe = ["Трехфазная розетка", "Розетка", "Освещение"]
 
@@ -31,8 +32,6 @@ groups_parameters = {
         "Материалы": {},
     },
 }
-# list_groups_parameters_keys = ["Номер группы", "Мощность", "Влагозащита", "Список точек"]
-
 
 # Параметры точки (словарь) и заголовки параметров (список)
 points_parameters = {
