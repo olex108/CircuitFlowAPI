@@ -1,7 +1,7 @@
 from functools import lru_cache
 from pathlib import Path
-from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import AmqpDsn
 
 
 class Settings(BaseSettings):
@@ -38,6 +38,10 @@ class Settings(BaseSettings):
 
         return f"postgresql+psycopg2://{self.DB_USERNAME}:{self.DB_PASSWORD}@{self.DB_HOST}/{self.DB_PORT}/{self.DB_NAME}"
 
+    @property
+    def rmq_url(self) -> AmqpDsn:
+        url: AmqpDsn = f"amqp://guest:guest@{self.HOST}:5672//"
+        return  url
 
 @lru_cache
 def get_settings():
