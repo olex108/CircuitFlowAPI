@@ -9,6 +9,7 @@ from src.models import ApiKey
 
 from src.crud.estimate import create_estimate_for_design_params, get_estimate_by_id
 from src.schemas.estimate import EstimateOut, EstimateCreated
+from src.tasks.calculate_estimate import calculate_estimate_save_in_db
 
 router = APIRouter(
     prefix="/estimates",
@@ -31,6 +32,9 @@ async def create_estimate(
             status_code=status.HTTP_404_BAD_REQUEST,
             detail="Design params is not found"
         )
+
+    # вызываем отложенную задачу расчета сметы
+    await calculate_estimate_save_in_db.kiq(estimate_id=estimate.id)
 
     return estimate
 

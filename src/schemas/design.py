@@ -31,10 +31,10 @@ class DesignParamsBase(BaseModel):
     suspended_ceiling: bool = Query(default=True, description="Наличие натяжного потолка")
 
     # Количественные показатели
-    sockets_quantity: Optional[int] = Query(None, ge=0, description="Розетки по количеству отверстий")
-    switches_quantity: Optional[int] = Query(None, ge=0, description="Одноклавишные и двухклавишные суммарно")
-    communication_sockets_quantity: Optional[int] = Query(None, ge=0, description="ТВ и интернет розетки")
-    light_point_quantity: Optional[int] = Query(None, ge=0, description="Светильники, бра, подсветки")
+    sockets_quantity: Optional[int] = Query(0, ge=0, description="Розетки по количеству отверстий")
+    switches_quantity: Optional[int] = Query(0, ge=0, description="Одноклавишные и двухклавишные суммарно")
+    communication_sockets_quantity: Optional[int] = Query(0, ge=0, description="ТВ и интернет розетки")
+    light_point_quantity: Optional[int] = Query(0, ge=0, description="Светильники, бра, подсветки")
 
     # Флаги оборудования
     built_box: bool = Query(default=False, description="Встроенный электрический щиток")

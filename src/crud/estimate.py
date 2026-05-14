@@ -1,6 +1,8 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
+from src.models import DesignParams
 from src.models.estimate import Estimate
 
 
@@ -25,3 +27,18 @@ async def get_estimate_by_id(estimate_id: int, session: AsyncSession) -> Estimat
     query = select(Estimate).where(Estimate.id == estimate_id)
     result = (await session.execute(query)).scalar_one_or_none()
     return result
+
+
+async def get_estimate_info_by_id(estimate_id: int, session: AsyncSession) -> Estimate | None:
+
+    query = (select(Estimate)
+             .where(Estimate.id == estimate_id)
+             .options(selectinload(Estimate.design_params).selectinload(DesignParams.design))
+             )
+    result = (await session.execute(query)).scalar_one_or_none()
+    return result
+
+
+async def save_estimate_in_db(estimate: Estimate, session: AsyncSession) -> None:
+    session.add(estimate)
+    await session.commit()
